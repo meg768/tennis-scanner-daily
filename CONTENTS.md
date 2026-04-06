@@ -96,7 +96,7 @@ Each match section should usually contain:
 - a short sub-block on `Form och historik`
 - a short sub-block on `Head-to-head` when the players have met before
   prefer a compact mini-table with prior meetings when that is clearer than prose
-- a short sub-block on `Odds` with rows ordered as bookmaker odds first, then the Codex editorial line, then local computed/model odds, and edge versus Oddset on the final row, plus a short `Spelidé` summary that says which side currently has value
+- a short sub-block on `Odds` with rows ordered as bookmaker odds first, then the Codex editorial line, then `Vitel` for the local computed/model odds, and a final row labeled `Vitel vs Oddset`, plus a short `Spelidé` summary that says which side currently has value
 - a short sub-block on `Skador och dagsläge` when current reporting exists
 - a short sub-block on `Marknad och modell` when odds or model context is available
 - a short closing line on what is most likely to decide the contest

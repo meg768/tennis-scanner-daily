@@ -58,9 +58,10 @@ Use sources in this order when possible:
 
 1. current Oddset ATP singles rows for the match list and bookmaker pricing
 2. ATP database / MCP tools for rankings, schedule context, head-to-head, and historical form
-3. ATP Tour pages and tournament pages for official match, draw, and player context
-4. Reuters and other reliable current reporting for injuries, absences, withdrawals, and recent developments
-5. direct player or tournament statements when they materially change the read on the match
+3. Tennis Abstract for side-by-side player statistics, Elo context, and Match Charting data when available
+4. ATP Tour pages and tournament pages for official match, draw, and player context
+5. Reuters and other reliable current reporting for injuries, absences, withdrawals, and recent developments
+6. direct player or tournament statements when they materially change the read on the match
 
 Rules for current reporting:
 
@@ -94,6 +95,7 @@ Each match section should usually contain:
 - a one-paragraph matchup summary
 - a short sub-block on `Spelbild`
 - a short sub-block on `Form och historik`
+- a short sub-block on `Tennis Abstract` with a compact side-by-side stats table when reliable player comparison data is available
 - a short sub-block on `Head-to-head` when the players have met before
   prefer a compact mini-table with prior meetings when that is clearer than prose
 - a short sub-block on `Odds` with rows ordered as bookmaker odds first, then the Codex editorial line, then `Vitel` for the local computed/model odds, and a final row labeled `Vitel vs Oddset`, plus a short `Spelidé` summary that says which side currently has value
@@ -111,6 +113,7 @@ Presentation note:
 
 - where the matchup is lopsided on surface fit
 - where recent form conflicts with long-run reputation
+- where Tennis Abstract matchup stats point to a style edge that is not obvious from rank alone
 - where the market may be overreacting or underreacting relative to the database-backed profile
 - where a fresh injury or return changes the expected level
 - where head-to-head is genuinely relevant rather than trivia
@@ -136,4 +139,4 @@ Presentation note:
 
 Use this prompt for future editions:
 
-> Generate today's Tennis Scanner Daily HTML edition. Use all ATP singles matches currently listed on Svenska Spel Oddset as the full match card. Exclude doubles, WTA, and Challenger. Enrich each matchup with ATP database context plus current web reporting, especially injuries and recent developments, and write the result in Swedish to `editions/YYYY-MM-DD.html` and `editions/latest.html`.
+> Generate today's Tennis Scanner Daily HTML edition. Use all ATP singles matches currently listed on Svenska Spel Oddset as the full match card. Exclude doubles, WTA, and Challenger. Enrich each matchup with ATP database context, Tennis Abstract side-by-side statistics when available, plus current web reporting, especially injuries and recent developments, and write the result in Swedish to `editions/YYYY-MM-DD.html` and `editions/latest.html`.

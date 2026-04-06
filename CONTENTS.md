@@ -95,7 +95,7 @@ Each match section should usually contain:
 - a one-paragraph matchup summary
 - a short sub-block on `Spelbild`
 - a short sub-block on `Form och historik`
-- a short sub-block on `Tennis Abstract` with a compact side-by-side stats table when reliable player comparison data is available
+- a short sub-block on `Tennis Abstract` with a compact side-by-side table, preferably centered on win-oriented splits such as last-52-weeks ATP win rate, clay win rate, record vs Top 10, and ATP career win rate
 - a short sub-block on `Head-to-head` when the players have met before
   prefer a compact mini-table with prior meetings when that is clearer than prose
 - a short sub-block on `Odds` with rows ordered as bookmaker odds first, then the Codex editorial line, then `Vitel` for the local computed/model odds, and a final row labeled `Vitel vs Oddset`, plus a short `Spelidé` summary that says which side currently has value
@@ -113,7 +113,7 @@ Presentation note:
 
 - where the matchup is lopsided on surface fit
 - where recent form conflicts with long-run reputation
-- where Tennis Abstract matchup stats point to a style edge that is not obvious from rank alone
+- where Tennis Abstract win splits or matchup stats point to an edge that is not obvious from rank alone
 - where the market may be overreacting or underreacting relative to the database-backed profile
 - where a fresh injury or return changes the expected level
 - where head-to-head is genuinely relevant rather than trivia

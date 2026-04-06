@@ -56,7 +56,7 @@ Normal source mix:
 
 - Svenska Spel Oddset for the current ATP singles card and bookmaker odds
 - the sibling ATP stack and MCP bridge for rankings, head-to-head, schedule context, and historical data
-- Tennis Abstract for side-by-side player stats and Match Charting comparisons
+- Tennis Abstract for side-by-side player stats, especially win splits and Match Charting comparisons
 - ATP Tour and tournament pages for official context
 - Reuters and other reliable reporting for current injury and availability news
 
@@ -67,4 +67,4 @@ The repo includes a simple `run.sh` loop that repeatedly asks Codex to refresh t
 ## Change Log
 
 - 2026-04-06: Initial tennis-scanner-daily project scaffold added with project memory, HTML template, and edition workflow.
-- 2026-04-07: Added Tennis Abstract as a side-by-side comparison source for surface-specific player stats in each match section.
+- 2026-04-07: Added Tennis Abstract as a side-by-side comparison source and shifted the matchup tables toward win-oriented splits such as last-52, clay, top-10, and career records.

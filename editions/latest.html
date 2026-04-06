@@ -132,10 +132,53 @@ a {
 
 .match-section__title {
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
   font-size: clamp(1.55rem, 2.4vw, 2rem);
   line-height: 1.08;
   letter-spacing: -0.02em;
   font-weight: 600;
+}
+
+.match-title__side {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.match-title__flag {
+  width: 1.45em;
+  height: 1.45em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--rule);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  font-size: 0.84em;
+  line-height: 1;
+}
+
+.match-title__name {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.match-title__rank {
+  color: var(--muted);
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.56em;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.match-title__separator {
+  color: var(--muted);
 }
 
 .match-section__summary {
@@ -148,7 +191,7 @@ a {
 
 .match-meta {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
   margin-top: 1rem;
 }
@@ -328,6 +371,15 @@ a {
     display: grid;
     gap: 0.35rem;
   }
+
+  .match-section__title {
+    gap: 0.35rem;
+  }
+
+  .match-title__separator {
+    width: 100%;
+    line-height: 0.6;
+  }
 }
     </style>
   </head>
@@ -348,11 +400,10 @@ a {
 
       <main class="match-list">
         <section class="match-section">
-          <h2 class="match-section__title">Tomas Martin Etcheverry mot Grigor Dimitrov</h2>
+          <h2 class="match-section__title"><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇦🇷</span><span class="match-title__name">Tomas Martin Etcheverry <span class="match-title__rank">#30</span></span></span><span class="match-title__separator">-</span><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇧🇬</span><span class="match-title__name">Grigor Dimitrov <span class="match-title__rank">#93</span></span></span></h2>
           <p class="match-section__summary">Etcheverry kommer in med mer färsk grusvana, men modellen ser ändå Dimitrov som den lite starkare sidan i matchen.</p>
           <div class="match-meta">
             <div class="match-meta__item">Tid<strong>11:00 CEST<span class="match-meta__subtext">I morgon, 7 april</span></strong></div>
-            <div class="match-meta__item">Ranking<strong>30 mot 93</strong></div>
             <div class="match-meta__item">Form<strong>7-3 mot 4-6</strong></div>
             <div class="match-meta__item">Oddset / modell<strong>1.67 / 2.20, modell lutar Dimitrov</strong></div>
           </div>
@@ -411,11 +462,10 @@ a {
         </section>
 
         <section class="match-section">
-          <h2 class="match-section__title">Roberto Bautista Agut mot Matteo Berrettini</h2>
+          <h2 class="match-section__title"><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇪🇸</span><span class="match-title__name">Roberto Bautista Agut <span class="match-title__rank">#85</span></span></span><span class="match-title__separator">-</span><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇮🇹</span><span class="match-title__name">Matteo Berrettini <span class="match-title__rank">#90</span></span></span></h2>
           <p class="match-section__summary">Berrettini har mer rå kraft och leder de tidigare grusmötena, men marknaden pressar ändå honom lite hårdare än modellen gör.</p>
           <div class="match-meta">
             <div class="match-meta__item">Tid<strong>11:00 CEST<span class="match-meta__subtext">I morgon, 7 april</span></strong></div>
-            <div class="match-meta__item">Ranking<strong>85 mot 90</strong></div>
             <div class="match-meta__item">Form<strong>4-6 mot 5-5</strong></div>
             <div class="match-meta__item">Oddset / modell<strong>3.10 / 1.37, modell något jämnare</strong></div>
           </div>
@@ -477,11 +527,10 @@ a {
         </section>
 
         <section class="match-section">
-          <h2 class="match-section__title">Hubert Hurkacz mot Luciano Darderi</h2>
+          <h2 class="match-section__title"><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇵🇱</span><span class="match-title__name">Hubert Hurkacz <span class="match-title__rank">#74</span></span></span><span class="match-title__separator">-</span><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇮🇹</span><span class="match-title__name">Luciano Darderi <span class="match-title__rank">#21</span></span></span></h2>
           <p class="match-section__summary">Det här är matchen där marknad och modell går längst ifrån varandra: Oddset håller Darderi som favorit, modellen lutar tydligt åt Hurkacz.</p>
           <div class="match-meta">
             <div class="match-meta__item">Tid<strong>11:00 CEST<span class="match-meta__subtext">I morgon, 7 april</span></strong></div>
-            <div class="match-meta__item">Ranking<strong>74 mot 21</strong></div>
             <div class="match-meta__item">Form<strong>4-6 mot 6-4</strong></div>
             <div class="match-meta__item">Oddset / modell<strong>2.43 / 1.56, modell lutar Hurkacz</strong></div>
           </div>
@@ -529,11 +578,10 @@ a {
         </section>
 
         <section class="match-section">
-          <h2 class="match-section__title">Jakub Mensik mot Fabian Marozsan</h2>
+          <h2 class="match-section__title"><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇨🇿</span><span class="match-title__name">Jakub Mensik <span class="match-title__rank">#26</span></span></span><span class="match-title__separator">-</span><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇭🇺</span><span class="match-title__name">Fabian Marozsan <span class="match-title__rank">#43</span></span></span></h2>
           <p class="match-section__summary">Mensik är favorit, men gruset gör mötet mer tekniskt och modellen är klart mindre övertygad än marknaden.</p>
           <div class="match-meta">
             <div class="match-meta__item">Tid<strong>12:10 CEST<span class="match-meta__subtext">I morgon, 7 april</span></strong></div>
-            <div class="match-meta__item">Ranking<strong>26 mot 43</strong></div>
             <div class="match-meta__item">Form<strong>7-3 mot 5-5</strong></div>
             <div class="match-meta__item">Oddset / modell<strong>1.48 / 2.65, modell mindre hård på Mensik</strong></div>
           </div>
@@ -593,11 +641,10 @@ a {
         </section>
 
         <section class="match-section">
-          <h2 class="match-section__title">Marin Cilic mot Alexander Shevchenko</h2>
+          <h2 class="match-section__title"><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇭🇷</span><span class="match-title__name">Marin Cilic <span class="match-title__rank">#51</span></span></span><span class="match-title__separator">-</span><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇰🇿</span><span class="match-title__name">Alexander Shevchenko <span class="match-title__rank">#77</span></span></span></h2>
           <p class="match-section__summary">En enkel läsning i oddsen, men en mer balanserad sådan i verkligheten: Cilic har högre klass, Shevchenko är redan inspelad via kvalet.</p>
           <div class="match-meta">
             <div class="match-meta__item">Tid<strong>12:30 CEST<span class="match-meta__subtext">I morgon, 7 april</span></strong></div>
-            <div class="match-meta__item">Ranking<strong>51 mot 77</strong></div>
             <div class="match-meta__item">Form<strong>6-4 mot 6-4</strong></div>
             <div class="match-meta__item">Oddset / modell<strong>1.62 / 2.28, modell nästan identisk</strong></div>
           </div>
@@ -645,11 +692,10 @@ a {
         </section>
 
         <section class="match-section">
-          <h2 class="match-section__title">Corentin Moutet mot Alexandre Muller</h2>
+          <h2 class="match-section__title"><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇫🇷</span><span class="match-title__name">Corentin Moutet <span class="match-title__rank">#31</span></span></span><span class="match-title__separator">-</span><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇫🇷</span><span class="match-title__name">Alexandre Muller <span class="match-title__rank">#88</span></span></span></h2>
           <p class="match-section__summary">Helfranskt möte där Muller är betydligt farligare än priset antyder, inte minst tack vare kvalspåret in i turneringen.</p>
           <div class="match-meta">
             <div class="match-meta__item">Tid<strong>13:20 CEST<span class="match-meta__subtext">I morgon, 7 april</span></strong></div>
-            <div class="match-meta__item">Ranking<strong>31 mot 88</strong></div>
             <div class="match-meta__item">Form<strong>3-7 mot 6-4</strong></div>
             <div class="match-meta__item">Oddset / modell<strong>1.53 / 2.50, modell lutar Muller</strong></div>
           </div>
@@ -708,11 +754,10 @@ a {
         </section>
 
         <section class="match-section">
-          <h2 class="match-section__title">Alexei Popyrin mot Casper Ruud</h2>
+          <h2 class="match-section__title"><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇦🇺</span><span class="match-title__name">Alexei Popyrin <span class="match-title__rank">#44</span></span></span><span class="match-title__separator">-</span><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇳🇴</span><span class="match-title__name">Casper Ruud <span class="match-title__rank">#12</span></span></span></h2>
           <p class="match-section__summary">Ruud är rätt favorit på grus, men Popyrin bär med sig ett direkt minne från samma plats där han slog norrmannen för exakt ett år sedan.</p>
           <div class="match-meta">
             <div class="match-meta__item">Tid<strong>13:20 CEST<span class="match-meta__subtext">I morgon, 7 april</span></strong></div>
-            <div class="match-meta__item">Ranking<strong>44 mot 12</strong></div>
             <div class="match-meta__item">Form<strong>4-6 mot 6-4</strong></div>
             <div class="match-meta__item">Oddset / modell<strong>3.10 / 1.37, modell något vänligare mot Popyrin</strong></div>
           </div>
@@ -771,11 +816,10 @@ a {
         </section>
 
         <section class="match-section">
-          <h2 class="match-section__title">Cameron Norrie mot Alex de Minaur</h2>
+          <h2 class="match-section__title"><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇬🇧</span><span class="match-title__name">Cameron Norrie <span class="match-title__rank">#24</span></span></span><span class="match-title__separator">-</span><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇦🇺</span><span class="match-title__name">Alex de Minaur <span class="match-title__rank">#6</span></span></span></h2>
           <p class="match-section__summary">De Minaur är den bättre allroundspelaren just nu, men Norrie är mer obekväm på grus än den rena rankingbilden säger.</p>
           <div class="match-meta">
             <div class="match-meta__item">Tid<strong>14:30 CEST<span class="match-meta__subtext">I morgon, 7 april</span></strong></div>
-            <div class="match-meta__item">Ranking<strong>24 mot 6</strong></div>
             <div class="match-meta__item">Form<strong>6-4 mot 7-3</strong></div>
             <div class="match-meta__item">Oddset / modell<strong>2.95 / 1.40, modell ger Norrie mer chans</strong></div>
           </div>
@@ -838,11 +882,10 @@ a {
         </section>
 
         <section class="match-section">
-          <h2 class="match-section__title">Gael Monfils mot Alexander Bublik</h2>
+          <h2 class="match-section__title"><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇫🇷</span><span class="match-title__name">Gael Monfils <span class="match-title__rank">#199</span></span></span><span class="match-title__separator">-</span><span class="match-title__side"><span class="match-title__flag" aria-hidden="true">🇰🇿</span><span class="match-title__name">Alexander Bublik <span class="match-title__rank">#11</span></span></span></h2>
           <p class="match-section__summary">Bublik har högre ranking och bättre serveprofil, men Monfils kommer in med publik, känsla och en färsk vinst på plats.</p>
           <div class="match-meta">
             <div class="match-meta__item">Tid<strong>14:30 CEST<span class="match-meta__subtext">I morgon, 7 april</span></strong></div>
-            <div class="match-meta__item">Ranking<strong>199 mot 11</strong></div>
             <div class="match-meta__item">Form<strong>3-7 mot 6-4</strong></div>
             <div class="match-meta__item">Oddset / modell<strong>2.85 / 1.43, modell lite snällare mot Monfils</strong></div>
           </div>

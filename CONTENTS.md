@@ -90,7 +90,7 @@ Formatting rules for the edition:
 
 Each match section should usually contain:
 
-- heading: `Player A mot Player B`
+- heading: rounded flag for player A, player A name, `#ranking`, separator, then rounded flag for player B, player B name, `#ranking`
 - a one-paragraph matchup summary
 - a short sub-block on `Spelbild`
 - a short sub-block on `Form och historik`
@@ -102,6 +102,10 @@ Each match section should usually contain:
 - a short closing line on what is most likely to decide the contest
 
 Exact labels may vary slightly in the HTML if the design needs it, but the substance should remain consistent.
+
+Presentation note:
+
+- when ranking is already shown in the match title, do not repeat it as a separate metadata box
 
 ## What To Emphasize
 

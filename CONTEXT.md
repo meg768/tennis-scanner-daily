@@ -99,6 +99,7 @@ Practical rule:
 - overwrite both files when regenerating the same day
 - the edition should be directly readable from the local file system without Node, Python, or a preview server
 - the default timestamp for the edition should use Central European time unless the user later asks for another display convention
+- the current Pi deployment target should refresh every hour by default
 
 ## Next Step
 

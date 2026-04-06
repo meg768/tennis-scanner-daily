@@ -61,7 +61,7 @@ Normal source mix:
 
 ## Automation
 
-The repo includes a simple `run.sh` loop that can repeatedly ask Codex to refresh the current edition and then publish the generated HTML directory.
+The repo includes a simple `run.sh` loop that repeatedly asks Codex to refresh the current edition and then publish the generated HTML directory. The current Pi deployment target is intended to refresh once per hour.
 
 ## Change Log
 

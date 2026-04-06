@@ -171,6 +171,16 @@ a {
   font-weight: 500;
 }
 
+.match-meta__subtext {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--muted);
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .match-body {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.75fr);
@@ -202,6 +212,49 @@ a {
   margin: 0;
   font-size: 1.12rem;
   line-height: 1.58;
+}
+
+.match-block ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.match-block li {
+  margin-bottom: 0.5rem;
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
+.match-block li:last-child {
+  margin-bottom: 0;
+}
+
+.mini-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.mini-table th,
+.mini-table td {
+  padding: 0.45rem 0.35rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.mini-table th {
+  color: var(--muted);
+  font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.mini-table tr:last-child td {
+  border-bottom: 0;
 }
 
 .footer-note {

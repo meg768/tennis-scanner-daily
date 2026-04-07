@@ -2,7 +2,7 @@
 
 Tennis Scanner Daily is a Codex-driven workspace for producing a daily HTML edition centered on the current ATP singles card from Svenska Spel Oddset.
 
-The goal is not to build a generic tennis news page or a pure odds screen. The workflow starts from the live match card, then enriches each matchup with ATP database history, head-to-head context, form, surface fit, and current reporting such as injuries or recent withdrawals.
+The goal is not to build a generic tennis news page or a pure odds screen. The workflow starts from the live match card, then enriches each matchup with ATP database history, head-to-head context, form, overall level, event-surface context, and current reporting such as injuries or recent withdrawals.
 
 ## What This Project Is For
 
@@ -68,6 +68,12 @@ Normal source mix:
 - ATP Tour and tournament pages for official context
 - Reuters and other reliable reporting for current injury and availability news
 
+Important interpretation rule:
+
+- do not treat clay, hard, or grass as the default narrative lens of the whole edition
+- use the actual event surface as matchup context when relevant
+- if the ATP dataset offers useful overall or surface-specific ELO/rating signals, they are valid supporting evidence and may be shown in the edition
+
 ## ATP Service Endpoints
 
 The ATP service documents itself now.
@@ -123,8 +129,6 @@ For the Pi runner, `run.sh` should use `codex exec --sandbox danger-full-access`
 ## Change Log
 
 - 2026-04-06: Initial tennis-scanner-daily project scaffold added with project memory, HTML template, and edition workflow.
-- 2026-04-07: Added Tennis Abstract as a side-by-side comparison source and shifted the matchup tables toward win-oriented splits such as last-52, clay, top-10, and career records.
-- 2026-04-07: Tightened `runner-scan` so live scans stay focused on the current template, current edition, and direct ATP/Tennis Abstract sources instead of broad repository exploration.
 - 2026-04-07: Locked `runner-scan` to the documented ATP endpoints so Pi scans do not waste time rediscovering APIs from the hosted frontend bundle.
 - 2026-04-07: Added compact-output rules for `runner-scan` so Pi scans do not bloat the nested Codex session with full HTML, payload, or schema dumps.
 - 2026-04-07: Documented the actual endpoint payload shapes from `tennis.egelberg.se`, especially the live contracts for `/api/oddset`, `/api/player/lookup`, `/api/players/odds`, `/api/players/head-to-head`, `/api/events/calendar`, and `/api/query`.

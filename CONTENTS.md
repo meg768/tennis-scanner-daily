@@ -23,13 +23,14 @@ Preferred output style:
 - keep the page readable rather than looking like a sportsbook table
 - start from the match itself: `Player A mot Player B`
 - then explain why the matchup matters, what each player is good at, how the surface shapes the contest, and what current context changes the picture
+- do not make any single surface the default lens of the whole edition; underlag should matter because of the current tournament, not because the scanner assumes clay-first analysis
 - keep section labels plain text rather than colored pill badges
 - the HTML should feel deliberate, calm, and focused on the matches themselves rather than on any newspaper metaphor
 
 ## Coverage Rules
 
 - include all ATP singles matches listed on the current Oddset ATP card
-- if the Oddset feed includes live ATP singles matches, they may appear in the edition, but the main emphasis should stay on upcoming matches
+- if the Oddset feed includes live ATP singles matches, they should not drive the odds analysis; use bookmaker prices only for matches that have not started yet
 - do not add matches that are not present on the current Oddset card
 - do not include ATP doubles
 - do not include WTA or mixed events
@@ -43,8 +44,9 @@ For each match, cover as much of the following as can be supported:
 
 - tournament, round if known, surface, and scheduled start time
 - player rankings and nationality when available from the ATP dataset
+- overall and surface-specific ELO or rating context from the ATP dataset when it adds real value
 - overall player profile: strengths, preferred patterns, and likely tactical identity
-- surface fit for the current event
+- surface fit for the current event, but only as tournament context rather than the default master angle
 - recent form from recent tournaments or recent match history
 - head-to-head record and notable prior meetings
 - model or database-backed matchup context when available
@@ -94,6 +96,7 @@ Each match section should usually contain:
 - a one-paragraph matchup summary
 - a short sub-block on `Spelbild`
 - a short sub-block on `Form och historik`
+- surface-specific ELO or rating context may be folded into `Form och historik` or `Marknad och modell` when it helps explain the matchup cleanly
 - a short sub-block on `Head-to-head` when the players have met before
   prefer a compact mini-table with prior meetings when that is clearer than prose
 - a short sub-block on `Odds` with rows ordered as bookmaker odds first, then the Codex editorial line, then `Vitel` for the local computed/model odds, and a final row labeled `Vitel vs Oddset`, plus a short `Spelidé` summary that says which side currently has value
@@ -109,8 +112,9 @@ Presentation note:
 
 ## What To Emphasize
 
-- where the matchup is lopsided on surface fit
+- where the matchup is lopsided on the actual event surface
 - where recent form conflicts with long-run reputation
+- where overall level and surface-specific ELO point in different directions
 - where the market may be overreacting or underreacting relative to the database-backed profile
 - where a fresh injury or return changes the expected level
 - where head-to-head is genuinely relevant rather than trivia
@@ -136,4 +140,4 @@ Presentation note:
 
 Use this prompt for future editions:
 
-> Generate today's Tennis Scanner Daily HTML edition. Use all ATP singles matches currently listed on Svenska Spel Oddset as the full match card. Exclude doubles, WTA, and Challenger. Enrich each matchup with ATP database context plus current web reporting, especially injuries and recent developments, and write the result in Swedish to `editions/YYYY-MM-DD.html` and `editions/latest.html`.
+> Generate today's Tennis Scanner Daily HTML edition. Use all ATP singles matches currently listed on Svenska Spel Oddset as the full match card. Exclude doubles, WTA, and Challenger. Enrich each matchup with ATP database context plus current web reporting, especially injuries and recent developments, and write the result in Swedish to `editions/YYYY-MM-DD.html` and `editions/latest.html`. Do not default to a clay-first or any other surface-first narrative; use the actual event surface only as matchup context, and use overall plus surface-specific ELO or rating signals when they add value.

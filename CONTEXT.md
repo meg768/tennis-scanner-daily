@@ -35,6 +35,7 @@ For the editorial brief covering what the tennis edition should contain, how it 
 - `scan` means: fetch the current ATP singles card from Oddset, enrich it with ATP database context plus current reporting, and update `editions/YYYY-MM-DD.html` and `editions/latest.html`
 - internal runner shortcut: `runner-scan`
 - when Codex receives `runner-scan`, treat it as the canonical non-chat scan command for this project: generate today's HTML edition directly in the current session, update `editions/YYYY-MM-DD.html` and `editions/latest.html`, keep the existing dossier layout, use `https://tennis.egelberg.se` plus current source hierarchy, and do not create helper scripts or extra project files
+- when handling `runner-scan`, do not frame the edition around any single surface such as clay; treat the current tournament surface as matchup context, not as the master narrative of the page
 - when handling `runner-scan`, never call `run.sh`, never spawn a nested runner, and never recurse back into the shell wrapper; do the scan work directly by fetching sources and writing the two edition files
 - when handling `runner-scan`, prefer direct ATP endpoint fetches and current edition/template reads over exploratory repo scans or broad shell searching
 - when handling `runner-scan`, keep local file reads narrowly scoped to `template.html`, `editions/latest.html`, and only the minimum extra project files needed to preserve the current layout and labels
@@ -42,11 +43,12 @@ For the editorial brief covering what the tennis edition should contain, how it 
 - when handling `runner-scan`, follow this order:
   1. read `template.html` and the current `editions/latest.html`
   2. fetch the current match card from `https://tennis.egelberg.se/api/oddset`
-  3. fetch only the ATP service lookups needed for the players on that card
-  4. enrich with ATP service data and current reporting only for the specific matches on the card
-  5. render the full HTML edition in Swedish
-  6. write `editions/YYYY-MM-DD.html`
-  7. copy the same HTML to `editions/latest.html`
+  3. filter the card to ATP singles matches that have not started yet when using Oddset prices; do not base the odds analysis on live odds
+  4. fetch only the ATP service lookups needed for the players on that card
+  5. enrich with ATP service data and current reporting only for the specific matches on the card
+  6. render the full HTML edition in Swedish
+  7. write `editions/YYYY-MM-DD.html`
+  8. copy the same HTML to `editions/latest.html`
 - when handling `runner-scan`, if a source is slow or unavailable, finish the edition with the verified data already gathered rather than stalling in long exploratory search loops
 - when handling `runner-scan`, use the documented ATP service endpoints directly and do not try to discover APIs from `https://tennis.egelberg.se`, its frontend HTML, or its bundled JavaScript assets
 - when endpoint documentation is needed, prefer the ATP service metadata endpoints first:
@@ -55,10 +57,11 @@ For the editorial brief covering what the tennis edition should contain, how it 
 - when handling `runner-scan`, the preferred ATP endpoint set is:
   - `GET /api/oddset` for the card and Oddset prices
   - `GET /api/player/lookup?query=...` for player id resolution
-  - `GET /api/players/odds/:playerA/:playerB?surface=Clay` for Vitel odds
+  - `GET /api/players/odds/:playerA/:playerB?surface=<event surface>` for Vitel odds, using the actual tournament surface when known rather than hard-coding clay
   - `GET /api/players/head-to-head/:playerA/:playerB?limit=10` for meetings and player metadata
   - `GET /api/events/calendar` for tournament context
   - `POST /api/query` for read-only SQL only when the specific endpoint set above is not enough
+- when handling `runner-scan`, use the database's overall and surface-specific ELO or rank signals as supporting evidence when they help explain the matchup, and it is acceptable to show them explicitly in the HTML when that makes the comparison clearer
 - when handling `runner-scan`, respect the current observed payload contracts:
   - `GET /api/oddset` returns a top-level array of match rows with `id`, `start`, `tournament`, `state`, `score`, `playerA`, and `playerB`
   - `GET /api/player/lookup` returns an array of candidate rows, usually with the best match first

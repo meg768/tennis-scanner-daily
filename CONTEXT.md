@@ -60,8 +60,10 @@ For the editorial brief covering what the tennis edition should contain, how it 
   - `GET /api/players/odds/:playerA/:playerB?surface=<event surface>` for Vitel odds, using the actual tournament surface when known rather than hard-coding clay
   - `GET /api/players/head-to-head/:playerA/:playerB?limit=10` for meetings and player metadata
   - `GET /api/events/calendar` for tournament context
+  - `GET /api/flags/:code.svg` for country flags, using ATP-style three-letter country codes such as `CZE`, `ITA`, or `AUS`
   - `POST /api/query` for read-only SQL only when the specific endpoint set above is not enough
 - when handling `runner-scan`, use the database's overall and surface-specific ELO or rank signals as supporting evidence when they help explain the matchup, and it is acceptable to show them explicitly in the HTML when that makes the comparison clearer
+- when handling `runner-scan`, prefer SVG flags from `GET /api/flags/:code.svg` over emoji flags; inline the SVG markup into the generated HTML when practical, and if a flag cannot be fetched, fall back to a short country code in the same flag slot rather than to emoji
 - when handling `runner-scan`, set the self-contained HTML theme from the dominant event surface on the card:
   - `theme-clay` for clay-dominant cards
   - `theme-grass` for grass-dominant cards

@@ -96,7 +96,7 @@ Formatting rules for the edition:
 
 Each match section should usually contain:
 
-- heading: rounded flag for player A, player A name, `#ranking`, separator, then rounded flag for player B, player B name, `#ranking`
+- heading: rounded SVG flag for player A, player A name, `#ranking`, separator, then rounded SVG flag for player B, player B name, `#ranking`
 - a one-paragraph matchup summary
 - a short sub-block on `Spelbild`
 - a short sub-block on `Form och historik`
@@ -139,6 +139,7 @@ Presentation note:
 - keep the styling inline in `template.html` unless the user later asks for a separate stylesheet
 - keep the theme easy to retune from one obvious CSS variable near the top of the file
 - keep surface themes self-contained in the HTML so each generated edition works as a standalone file
+- prefer ATP-service SVG flags over emoji in the final page; inline them when possible, and only fall back to a short country code if a flag asset is missing
 - preserve strong mobile readability for long match sections
 
 ## Daily Prompt Template

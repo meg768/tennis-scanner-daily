@@ -57,6 +57,7 @@ Expected behavior:
 - `scan` or `generate today's edition` should update the local HTML edition files
 - a normal scan should not create extra helper scripts or new project source files
 - `help` should explain how the match list is sourced and how the edition is assembled
+- this project uses one command model only; there is no separate user-mode versus developer-mode command split
 
 ## Sources
 
@@ -64,54 +65,20 @@ Normal source mix:
 
 - Svenska Spel Oddset for the current ATP singles card and bookmaker odds
 - `https://tennis.egelberg.se` for rankings, head-to-head, schedule context, model odds, and read-only SQL access
-- Tennis Abstract for side-by-side player stats, especially win splits and Match Charting comparisons
 - ATP Tour and tournament pages for official context
 - Reuters and other reliable reporting for current injury and availability news
 
 ## ATP Service Endpoints
 
-The ATP service currently exposes these runtime endpoints under `https://tennis.egelberg.se`:
+The ATP service documents itself now.
 
-- `GET /ok`
-  Returns a simple health payload (`I am OK`).
+- `GET /api/meta/endpoints`
+  Returns machine-readable metadata for the service endpoints, including method, params, query usage, and payload notes.
 
-- `GET /api/ping`
-  Returns a lightweight liveness payload with `message` and backend `version`. Good for deploy verification.
+- `GET /api/meta/schema.sql`
+  Returns the raw database schema SQL, including comments, functions, procedures, and DDL context.
 
-- `GET /api/matches/live`
-  Returns normalized ATP live matches from ATP Tour live data.
-
-- `GET /api/player/rankings?top=N`
-  Returns current ATP rankings. `top` defaults to `100`.
-
-- `GET /api/player/search?term=...`
-  Runs the MariaDB `PLAYER_SEARCH(...)` procedure and returns ranked player candidates.
-
-- `GET /api/player/lookup?query=...`
-  Resolves a single best-match player id through the MariaDB `PLAYER_LOOKUP(...)` function.
-  Also accepts `term` or `searchTerm`.
-
-- `GET /api/oddset`
-  Returns the normalized Oddset ATP-family match feed used by this project.
-  This is the main endpoint for current live and upcoming bookmaker rows.
-
-- `GET /api/oddset?raw=1`
-  Returns the raw upstream payload bundle before normalization.
-
-- `GET /api/players/odds/:playerA/:playerB?surface=Clay`
-  Returns the hosted model odds for a specific ATP matchup.
-  `playerA` and `playerB` should be ATP ids present in the service database.
-
-- `GET /api/players/head-to-head/:playerA/:playerB?limit=10`
-  Returns resolved player metadata, overall H2H, surface splits, and recent meetings.
-  Supports ids or names in practice.
-
-- `GET /api/events/calendar`
-  Returns the ATP calendar feed normalized from ATP Tour tournament calendar data.
-
-- `POST /api/query`
-  Runs read-only SQL against the ATP database behind the hosted service.
-  Intended for trusted use only.
+For this project, treat those two metadata endpoints as the canonical documentation layer rather than maintaining a second full endpoint reference here.
 
 ## ATP Service Notes
 
@@ -123,6 +90,9 @@ The ATP service currently exposes these runtime endpoints under `https://tennis.
   `GET /api/players/head-to-head/:playerA/:playerB`
   `GET /api/events/calendar`
   `POST /api/query`
+- canonical service docs:
+  `GET /api/meta/endpoints`
+  `GET /api/meta/schema.sql`
 - `/api/query` is read-only by design, but it still exposes broad database reads and should stay private
 - if we want the exact same config locally and on the Pi, the scanner should target these HTTP endpoints directly
 
@@ -144,7 +114,7 @@ The repo includes a `run.sh` runner for scans.
 
 Internally, `run.sh` sends the short command `runner-scan` to Codex. That means scan behavior should normally be changed in the project memory rather than by editing a long embedded shell prompt.
 `runner-scan` is meant to execute the scan directly in the active Codex session. It must not call `run.sh` again or start a nested runner process.
-`runner-scan` should stay narrowly focused during a live scan: read `template.html` and `editions/latest.html`, fetch the current card and player context from `https://tennis.egelberg.se`, add Tennis Abstract and current reporting for the specific matches on the card, then write the two edition files. It should avoid broad repo searching or wandering through unrelated historical files during a normal scan.
+`runner-scan` should stay narrowly focused during a live scan: read `template.html` and `editions/latest.html`, fetch the current card and player context from `https://tennis.egelberg.se`, add current reporting for the specific matches on the card, then write the two edition files. It should avoid broad repo searching or wandering through unrelated historical files during a normal scan.
 `runner-scan` should also use the documented ATP service endpoints directly. It should not probe `https://tennis.egelberg.se/`, inspect the frontend app, or scrape bundled JavaScript assets just to rediscover endpoints that are already part of the project memory.
 To keep Pi scans stable, `runner-scan` should keep tool output compact. It should prefer filtered endpoint reads and small excerpts over dumping full HTML, full JSON payloads, or large schema responses into the session.
 
@@ -157,3 +127,5 @@ For the Pi runner, `run.sh` should use `codex exec --sandbox danger-full-access`
 - 2026-04-07: Tightened `runner-scan` so live scans stay focused on the current template, current edition, and direct ATP/Tennis Abstract sources instead of broad repository exploration.
 - 2026-04-07: Locked `runner-scan` to the documented ATP endpoints so Pi scans do not waste time rediscovering APIs from the hosted frontend bundle.
 - 2026-04-07: Added compact-output rules for `runner-scan` so Pi scans do not bloat the nested Codex session with full HTML, payload, or schema dumps.
+- 2026-04-07: Documented the actual endpoint payload shapes from `tennis.egelberg.se`, especially the live contracts for `/api/oddset`, `/api/player/lookup`, `/api/players/odds`, `/api/players/head-to-head`, `/api/events/calendar`, and `/api/query`.
+- 2026-04-07: Removed the inherited user-mode versus developer-mode split from this project and simplified command handling to one workflow.

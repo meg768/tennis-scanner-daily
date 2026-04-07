@@ -24,39 +24,34 @@ For the editorial brief covering what the tennis edition should contain, how it 
 - startup rule: at the beginning of every new thread or restart, read this file first and then `CONTENTS.md` before replying to the user or running commands
 - this startup rule applies even to casual greetings, short prompts, and trivial terminal-style requests
 - the product output is the generated local HTML edition, not a chat-first daily paper
-- user mode is the default assumption
 - do not assume the current user is the same as the future end user of the scanner; adapt tone and actions to the active role in the conversation
 - before relying on prior workflow assumptions, check this file and `CONTENTS.md` as the source of truth for current behavior
 - the normal deliverable is `editions/YYYY-MM-DD.html` plus `editions/latest.html`
 - after generating an edition, a short chat reply that confirms the output path is enough unless the user asks for more detail
 
-## Operating Modes
+## Core Commands
 
-### User Mode
-
-Use this section when the current user is using the scanner as an end user rather than changing the project itself.
-
-- user mode is the default assumption
-- in user mode, treat short prompts such as `scan`, `edition`, `refresh`, and `help` as product-use commands rather than project-maintenance commands
-- in user mode, the main output is the local HTML edition
-- in user mode, when generating a new edition, update `editions/YYYY-MM-DD.html` and `editions/latest.html` as part of the normal flow
-- in user mode, `scan` means: fetch the current ATP singles card from Oddset, enrich it with ATP database context plus current reporting, and publish the HTML edition
+- treat short prompts such as `scan`, `edition`, `refresh`, and `help` as scanner commands
+- `scan` means: fetch the current ATP singles card from Oddset, enrich it with ATP database context plus current reporting, and update `editions/YYYY-MM-DD.html` and `editions/latest.html`
 - internal runner shortcut: `runner-scan`
 - when Codex receives `runner-scan`, treat it as the canonical non-chat scan command for this project: generate today's HTML edition directly in the current session, update `editions/YYYY-MM-DD.html` and `editions/latest.html`, keep the existing dossier layout, use `https://tennis.egelberg.se` plus current source hierarchy, and do not create helper scripts or extra project files
 - when handling `runner-scan`, never call `run.sh`, never spawn a nested runner, and never recurse back into the shell wrapper; do the scan work directly by fetching sources and writing the two edition files
 - when handling `runner-scan`, prefer direct ATP endpoint fetches and current edition/template reads over exploratory repo scans or broad shell searching
 - when handling `runner-scan`, keep local file reads narrowly scoped to `template.html`, `editions/latest.html`, and only the minimum extra project files needed to preserve the current layout and labels
-- when handling `runner-scan`, do not grep or scan the whole repository for context, do not inspect old dated editions unless they are directly needed, and do not open helper scripts unless a specific parser is required for Tennis Abstract data
+- when handling `runner-scan`, do not grep or scan the whole repository for context, do not inspect old dated editions unless they are directly needed, and do not open helper scripts unless the user explicitly asks for project-level work
 - when handling `runner-scan`, follow this order:
   1. read `template.html` and the current `editions/latest.html`
   2. fetch the current match card from `https://tennis.egelberg.se/api/oddset`
   3. fetch only the ATP service lookups needed for the players on that card
-  4. enrich with Tennis Abstract and current reporting only for the specific matches on the card
+  4. enrich with ATP service data and current reporting only for the specific matches on the card
   5. render the full HTML edition in Swedish
   6. write `editions/YYYY-MM-DD.html`
   7. copy the same HTML to `editions/latest.html`
 - when handling `runner-scan`, if a source is slow or unavailable, finish the edition with the verified data already gathered rather than stalling in long exploratory search loops
 - when handling `runner-scan`, use the documented ATP service endpoints directly and do not try to discover APIs from `https://tennis.egelberg.se`, its frontend HTML, or its bundled JavaScript assets
+- when endpoint documentation is needed, prefer the ATP service metadata endpoints first:
+  - `GET /api/meta/endpoints`
+  - `GET /api/meta/schema.sql`
 - when handling `runner-scan`, the preferred ATP endpoint set is:
   - `GET /api/oddset` for the card and Oddset prices
   - `GET /api/player/lookup?query=...` for player id resolution
@@ -64,26 +59,18 @@ Use this section when the current user is using the scanner as an end user rathe
   - `GET /api/players/head-to-head/:playerA/:playerB?limit=10` for meetings and player metadata
   - `GET /api/events/calendar` for tournament context
   - `POST /api/query` for read-only SQL only when the specific endpoint set above is not enough
+- when handling `runner-scan`, respect the current observed payload contracts:
+  - `GET /api/oddset` returns a top-level array of match rows with `id`, `start`, `tournament`, `state`, `score`, `playerA`, and `playerB`
+  - `GET /api/player/lookup` returns an array of candidate rows, usually with the best match first
+  - `GET /api/players/odds/:playerA/:playerB` returns a two-item array of model prices `[oddsA, oddsB]`
+  - `GET /api/events/calendar` returns an object with an `events` array, not a top-level array
 - when handling `runner-scan`, keep tool output compact: do not print full HTML files, full calendar payloads, full Oddset payloads, or large schema dumps into the session unless a small excerpt is truly needed
 - when handling `runner-scan`, prefer filtered shell commands and compact JSON extraction over raw `sed` or raw `curl` dumps; load only the fields needed for the current edition
 - when handling `runner-scan`, avoid exhaustive per-player probing when one batched or filtered request can answer the question, and avoid schema discovery unless the scan is genuinely blocked without it
-- in user mode, when the user asks how it works, explain the feed and analysis logic in simple language and emphasize that the output is an HTML page rather than a chat edition
-
-### Developer Mode
-
-Use this section when the current user is working on the project itself rather than using the scanner as an end user.
-
-- only switch into developer mode when the user explicitly indicates that they are doing so, for example by saying `devmode`
-- when the current user is in developer mode, interpret requests like `backup`, `restore`, git operations, workflow edits, HTML design work, and memory updates as project-maintenance tasks
-- in developer mode, `commit` means commit plus push
-- in developer mode, when a commit includes meaningful user-facing or workflow changes, update the `Change Log` section in `README.md` as part of that commit
-- in developer mode, `backup` means update one rolling git backup that can be returned to later
-- do not create separate named backup tags unless the user explicitly asks for them
-- in developer mode, `restore` means return the repository to the rolling backup point unless the user specifies a different one
-- when doing HTML design work without asking for a live edition, use `template.html` with small isolated changes rather than maintaining a separate preview page
-- for HTML design iteration in developer mode, prefer small isolated visual changes instead of broad restyles unless the user explicitly asks for a larger redesign
+- when the user asks how the scanner works, explain the feed and analysis logic in simple language and emphasize that the output is an HTML page rather than a chat edition
+- for HTML design iteration, use `template.html` with small isolated changes rather than maintaining a separate preview page unless the user asks for a broader redesign
 - section titles in the HTML edition should render as plain text labels without pill badges
-- current preferred HTML direction in developer mode: editorial and newspaper-like, but centered on match dossiers rather than market boxes
+- current preferred HTML direction: editorial and newspaper-like, but centered on match dossiers rather than market boxes
 
 ## Product Rules
 

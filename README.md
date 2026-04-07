@@ -42,6 +42,7 @@ The page is intentionally static:
 - `editions/latest.html` stores the current edition
 
 The design is meant to stay focused on the match list itself. It should still work well on both desktop and mobile.
+The generated HTML can also carry the dominant surface theme in a fully self-contained way and follow the viewer's light/dark system preference without needing any external app runtime.
 
 ## Quick Prompts
 

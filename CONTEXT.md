@@ -68,6 +68,7 @@ For the editorial brief covering what the tennis edition should contain, how it 
   - `theme-hard` or the default blue base for hard-court-dominant cards
   - if the card is mixed, prefer the dominant surface or fall back to the default blue hard-court palette
 - the generated HTML must remain fully standalone even when theming changes, so all surface themes should live in the inline CSS of the page rather than in external stylesheets or runtime assets
+- the generated HTML should also support automatic light and dark mode via inline CSS variables and `prefers-color-scheme`, without relying on external JavaScript or non-standalone assets
 - when handling `runner-scan`, respect the current observed payload contracts:
   - `GET /api/oddset` returns a top-level array of match rows with `id`, `start`, `tournament`, `state`, `score`, `playerA`, and `playerB`
   - `GET /api/player/lookup` returns an array of candidate rows, usually with the best match first

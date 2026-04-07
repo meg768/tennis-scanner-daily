@@ -28,6 +28,8 @@ Preferred output style:
 - the HTML should feel deliberate, calm, and focused on the matches themselves rather than on any newspaper metaphor
 - the page theme may shift with the dominant surface on the current card:
   clay should use warm red/terracotta tones, grass should use green tones, and hard court should use blue tones
+- the same surface theme should work in both light mode and dark mode, with dark mode following the viewer's system preference when possible
+- prefer flat, deliberate box colors over visible tonal gradients inside individual cards and sub-blocks
 
 ## Coverage Rules
 

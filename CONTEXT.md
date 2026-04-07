@@ -62,6 +62,12 @@ For the editorial brief covering what the tennis edition should contain, how it 
   - `GET /api/events/calendar` for tournament context
   - `POST /api/query` for read-only SQL only when the specific endpoint set above is not enough
 - when handling `runner-scan`, use the database's overall and surface-specific ELO or rank signals as supporting evidence when they help explain the matchup, and it is acceptable to show them explicitly in the HTML when that makes the comparison clearer
+- when handling `runner-scan`, set the self-contained HTML theme from the dominant event surface on the card:
+  - `theme-clay` for clay-dominant cards
+  - `theme-grass` for grass-dominant cards
+  - `theme-hard` or the default blue base for hard-court-dominant cards
+  - if the card is mixed, prefer the dominant surface or fall back to the default blue hard-court palette
+- the generated HTML must remain fully standalone even when theming changes, so all surface themes should live in the inline CSS of the page rather than in external stylesheets or runtime assets
 - when handling `runner-scan`, respect the current observed payload contracts:
   - `GET /api/oddset` returns a top-level array of match rows with `id`, `start`, `tournament`, `state`, `score`, `playerA`, and `playerB`
   - `GET /api/player/lookup` returns an array of candidate rows, usually with the best match first

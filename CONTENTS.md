@@ -26,6 +26,8 @@ Preferred output style:
 - do not make any single surface the default lens of the whole edition; underlag should matter because of the current tournament, not because the scanner assumes clay-first analysis
 - keep section labels plain text rather than colored pill badges
 - the HTML should feel deliberate, calm, and focused on the matches themselves rather than on any newspaper metaphor
+- the page theme may shift with the dominant surface on the current card:
+  clay should use warm red/terracotta tones, grass should use green tones, and hard court should use blue tones
 
 ## Coverage Rules
 
@@ -134,6 +136,7 @@ Presentation note:
 - the daily output should be readable as a standalone local HTML page
 - keep the styling inline in `template.html` unless the user later asks for a separate stylesheet
 - keep the theme easy to retune from one obvious CSS variable near the top of the file
+- keep surface themes self-contained in the HTML so each generated edition works as a standalone file
 - preserve strong mobile readability for long match sections
 
 ## Daily Prompt Template

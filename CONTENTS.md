@@ -96,7 +96,7 @@ Formatting rules for the edition:
 
 Each match section should usually contain:
 
-- heading: rounded SVG flag for player A, player A name, `#ranking`, separator, then rounded SVG flag for player B, player B name, `#ranking`
+- heading: rounded SVG flag for player A, player A name, optional country code in parentheses, `#ranking`, `vs`, then rounded SVG flag for player B, player B name, optional country code in parentheses, `#ranking`
 - a one-paragraph matchup summary
 - a short sub-block on `Spelbild`
 - a short sub-block on `Form och historik`

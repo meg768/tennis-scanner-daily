@@ -41,6 +41,8 @@ Use this section when the current user is using the scanner as an end user rathe
 - in user mode, the main output is the local HTML edition
 - in user mode, when generating a new edition, update `editions/YYYY-MM-DD.html` and `editions/latest.html` as part of the normal flow
 - in user mode, `scan` means: fetch the current ATP singles card from Oddset, enrich it with ATP database context plus current reporting, and publish the HTML edition
+- internal runner shortcut: `runner-scan`
+- when Codex receives `runner-scan`, treat it as the canonical non-chat scan command for this project: generate today's HTML edition only, update `editions/YYYY-MM-DD.html` and `editions/latest.html`, keep the existing dossier layout, use `https://tennis.egelberg.se` plus current source hierarchy, and do not create helper scripts or extra project files
 - in user mode, when the user asks how it works, explain the feed and analysis logic in simple language and emphasize that the output is an HTML page rather than a chat edition
 
 ### Developer Mode
@@ -97,6 +99,10 @@ Practical rule:
 - write the daily HTML edition to `editions/YYYY-MM-DD.html` using the scan date
 - write the same current edition to `editions/latest.html`
 - overwrite both files when regenerating the same day
+- `run.sh` should default to one scan and exit unless looping is explicitly requested
+- `run.sh --publish` should be optional and default to off
+- `run.sh --loop HOURS` should opt into repeated scans with an hours-based interval
+- `run.sh` should call the short internal command `runner-scan` rather than embedding a long literal scan prompt; update the project memory when scan behavior changes, not the shell script
 - when running a normal `scan`, do not create new helper scripts, generators, or scratch source files in the repository
 - for normal scan execution, limit file changes to the generated edition files unless the user explicitly asks for project or workflow edits
 - on the Pi deployment target, prefer `codex exec --sandbox danger-full-access` over `--full-auto` because the nested workspace sandbox may block DNS or outbound HTTP needed for `tennis.egelberg.se` and Oddset

@@ -128,7 +128,21 @@ The ATP service currently exposes these runtime endpoints under `https://tennis.
 
 ## Automation
 
-The repo includes a simple `run.sh` loop that repeatedly asks Codex to refresh the current edition and then publish the generated HTML directory. The current Pi deployment target is intended to refresh once per hour.
+The repo includes a `run.sh` runner for scans.
+
+- `./run.sh`
+  Runs one scan and exits.
+
+- `./run.sh --publish`
+  Runs one scan, publishes `editions/` to the web root, and exits.
+
+- `./run.sh --loop 1`
+  Runs one scan immediately, then continues with one scan every hour.
+
+- `./run.sh --publish --loop 1`
+  Runs one scan immediately, publishes it, then keeps refreshing and publishing every hour.
+
+Internally, `run.sh` sends the short command `runner-scan` to Codex. That means scan behavior should normally be changed in the project memory rather than by editing a long embedded shell prompt.
 
 For the Pi runner, `run.sh` should use `codex exec --sandbox danger-full-access` rather than `--full-auto`. In practice, the narrower nested sandbox can block DNS or outbound HTTP for `tennis.egelberg.se` and Oddset even when plain shell networking works on the machine.
 

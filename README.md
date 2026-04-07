@@ -130,6 +130,8 @@ The ATP service currently exposes these runtime endpoints under `https://tennis.
 
 The repo includes a simple `run.sh` loop that repeatedly asks Codex to refresh the current edition and then publish the generated HTML directory. The current Pi deployment target is intended to refresh once per hour.
 
+For the Pi runner, `run.sh` should use `codex exec --sandbox danger-full-access` rather than `--full-auto`. In practice, the narrower nested sandbox can block DNS or outbound HTTP for `tennis.egelberg.se` and Oddset even when plain shell networking works on the machine.
+
 ## Change Log
 
 - 2026-04-06: Initial tennis-scanner-daily project scaffold added with project memory, HTML template, and edition workflow.

@@ -99,6 +99,7 @@ Practical rule:
 - overwrite both files when regenerating the same day
 - when running a normal `scan`, do not create new helper scripts, generators, or scratch source files in the repository
 - for normal scan execution, limit file changes to the generated edition files unless the user explicitly asks for project or workflow edits
+- on the Pi deployment target, prefer `codex exec --sandbox danger-full-access` over `--full-auto` because the nested workspace sandbox may block DNS or outbound HTTP needed for `tennis.egelberg.se` and Oddset
 - the edition should be directly readable from the local file system without Node, Python, or a preview server
 - the default timestamp for the edition should use Central European time unless the user later asks for another display convention
 - the current Pi deployment target should refresh every hour by default

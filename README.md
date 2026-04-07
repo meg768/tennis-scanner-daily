@@ -146,6 +146,7 @@ Internally, `run.sh` sends the short command `runner-scan` to Codex. That means 
 `runner-scan` is meant to execute the scan directly in the active Codex session. It must not call `run.sh` again or start a nested runner process.
 `runner-scan` should stay narrowly focused during a live scan: read `template.html` and `editions/latest.html`, fetch the current card and player context from `https://tennis.egelberg.se`, add Tennis Abstract and current reporting for the specific matches on the card, then write the two edition files. It should avoid broad repo searching or wandering through unrelated historical files during a normal scan.
 `runner-scan` should also use the documented ATP service endpoints directly. It should not probe `https://tennis.egelberg.se/`, inspect the frontend app, or scrape bundled JavaScript assets just to rediscover endpoints that are already part of the project memory.
+To keep Pi scans stable, `runner-scan` should keep tool output compact. It should prefer filtered endpoint reads and small excerpts over dumping full HTML, full JSON payloads, or large schema responses into the session.
 
 For the Pi runner, `run.sh` should use `codex exec --sandbox danger-full-access` rather than `--full-auto`. In practice, the narrower nested sandbox can block DNS or outbound HTTP for `tennis.egelberg.se` and Oddset even when plain shell networking works on the machine.
 
@@ -155,3 +156,4 @@ For the Pi runner, `run.sh` should use `codex exec --sandbox danger-full-access`
 - 2026-04-07: Added Tennis Abstract as a side-by-side comparison source and shifted the matchup tables toward win-oriented splits such as last-52, clay, top-10, and career records.
 - 2026-04-07: Tightened `runner-scan` so live scans stay focused on the current template, current edition, and direct ATP/Tennis Abstract sources instead of broad repository exploration.
 - 2026-04-07: Locked `runner-scan` to the documented ATP endpoints so Pi scans do not waste time rediscovering APIs from the hosted frontend bundle.
+- 2026-04-07: Added compact-output rules for `runner-scan` so Pi scans do not bloat the nested Codex session with full HTML, payload, or schema dumps.

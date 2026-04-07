@@ -64,6 +64,9 @@ Use this section when the current user is using the scanner as an end user rathe
   - `GET /api/players/head-to-head/:playerA/:playerB?limit=10` for meetings and player metadata
   - `GET /api/events/calendar` for tournament context
   - `POST /api/query` for read-only SQL only when the specific endpoint set above is not enough
+- when handling `runner-scan`, keep tool output compact: do not print full HTML files, full calendar payloads, full Oddset payloads, or large schema dumps into the session unless a small excerpt is truly needed
+- when handling `runner-scan`, prefer filtered shell commands and compact JSON extraction over raw `sed` or raw `curl` dumps; load only the fields needed for the current edition
+- when handling `runner-scan`, avoid exhaustive per-player probing when one batched or filtered request can answer the question, and avoid schema discovery unless the scan is genuinely blocked without it
 - in user mode, when the user asks how it works, explain the feed and analysis logic in simple language and emphasize that the output is an HTML page rather than a chat edition
 
 ### Developer Mode

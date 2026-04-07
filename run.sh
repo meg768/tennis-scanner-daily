@@ -4,20 +4,51 @@ set -euo pipefail
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
 SCAN_COMMAND="runner-scan"
 PUBLISH_DIR="/var/www/html/tennis-scanner-daily"
+TIMEZONE="Europe/Stockholm"
 PUBLISH=false
-LOOP_HOURS=""
+DAILY_TIME=""
 
 usage() {
   cat <<'EOF'
-Usage: ./run.sh [--publish] [--loop HOURS]
+Usage: ./run.sh [--publish] [--daily HH:MM]
 
   --publish       Publish editions/ to the web root after each scan
-  --loop HOURS    Keep running and wait HOURS between scans
+  --daily HH:MM   Wait for the next daily run at HH:MM in Europe/Stockholm
 
 Defaults:
   publish is off
-  loop is off, so the script runs one scan and exits
+  daily scheduling is off, so the script runs one scan and exits
 EOF
+}
+
+is_gnu_date() {
+  date --version >/dev/null 2>&1
+}
+
+current_epoch() {
+  TZ="$TIMEZONE" date +%s
+}
+
+target_epoch_today() {
+  local target_time="$1"
+  if is_gnu_date; then
+    TZ="$TIMEZONE" date -d "$(TZ="$TIMEZONE" date +%F) ${target_time}:00" +%s
+  else
+    TZ="$TIMEZONE" date -j -f "%Y-%m-%d %H:%M:%S" "$(TZ="$TIMEZONE" date +%F) ${target_time}:00" +%s
+  fi
+}
+
+next_daily_sleep_seconds() {
+  local target_time="$1"
+  local now_epoch target_epoch
+  now_epoch="$(current_epoch)"
+  target_epoch="$(target_epoch_today "$target_time")"
+
+  if (( now_epoch >= target_epoch )); then
+    target_epoch=$((target_epoch + 86400))
+  fi
+
+  echo $((target_epoch - now_epoch))
 }
 
 while [[ $# -gt 0 ]]; do
@@ -26,13 +57,13 @@ while [[ $# -gt 0 ]]; do
       PUBLISH=true
       shift
       ;;
-    --loop)
+    --daily)
       if [[ $# -lt 2 ]]; then
-        echo "Missing value for --loop" >&2
+        echo "Missing value for --daily" >&2
         usage >&2
         exit 1
       fi
-      LOOP_HOURS="$2"
+      DAILY_TIME="$2"
       shift 2
       ;;
     -h|--help)
@@ -47,8 +78,8 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ -n "$LOOP_HOURS" ]] && ! [[ "$LOOP_HOURS" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
-  echo "--loop must be a positive number of hours" >&2
+if [[ -n "$DAILY_TIME" ]] && ! [[ "$DAILY_TIME" =~ ^([01][0-9]|2[0-3]):([0-5][0-9])$ ]]; then
+  echo "--daily must be in HH:MM format" >&2
   exit 1
 fi
 
@@ -63,13 +94,12 @@ run_scan() {
   fi
 }
 
-run_scan
-
-if [[ -z "$LOOP_HOURS" ]]; then
+if [[ -z "$DAILY_TIME" ]]; then
+  run_scan
   exit 0
 fi
 
 while true; do
-  sleep "${LOOP_HOURS}h"
+  sleep "$(next_daily_sleep_seconds "$DAILY_TIME")"
   run_scan
 done

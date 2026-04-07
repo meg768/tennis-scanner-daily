@@ -110,16 +110,16 @@ Practical rule:
 - write the daily HTML edition to `editions/YYYY-MM-DD.html` using the scan date
 - write the same current edition to `editions/latest.html`
 - overwrite both files when regenerating the same day
-- `run.sh` should default to one scan and exit unless looping is explicitly requested
+- `run.sh` should default to one scan and exit unless daily scheduling is explicitly requested
 - `run.sh --publish` should be optional and default to off
-- `run.sh --loop HOURS` should opt into repeated scans with an hours-based interval
+- `run.sh --daily HH:MM` should opt into a long-lived daily schedule in `Europe/Stockholm`
 - `run.sh` should call the short internal command `runner-scan` rather than embedding a long literal scan prompt; update the project memory when scan behavior changes, not the shell script
 - when running a normal `scan`, do not create new helper scripts, generators, or scratch source files in the repository
 - for normal scan execution, limit file changes to the generated edition files unless the user explicitly asks for project or workflow edits
 - on the Pi deployment target, prefer `codex exec --sandbox danger-full-access` over `--full-auto` because the nested workspace sandbox may block DNS or outbound HTTP needed for `tennis.egelberg.se` and Oddset
 - the edition should be directly readable from the local file system without Node, Python, or a preview server
 - the default timestamp for the edition should use Central European time unless the user later asks for another display convention
-- the current Pi deployment target should refresh every hour by default
+- the current preferred long-running schedule is one daily scan at a fixed Stockholm time rather than an every-N-hours loop
 
 ## Next Step
 

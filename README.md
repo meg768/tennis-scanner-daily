@@ -106,11 +106,11 @@ The repo includes a `run.sh` runner for scans.
 - `./run.sh --publish`
   Runs one scan, publishes `editions/` to the web root, and exits.
 
-- `./run.sh --loop 1`
-  Runs one scan immediately, then continues with one scan every hour.
+- `./run.sh --daily 09:00`
+  Waits for the next `09:00` in `Europe/Stockholm`, then runs once per day at that time.
 
-- `./run.sh --publish --loop 1`
-  Runs one scan immediately, publishes it, then keeps refreshing and publishing every hour.
+- `./run.sh --publish --daily 09:00`
+  Publishes after each daily run and keeps the process alive inside PM2.
 
 Internally, `run.sh` sends the short command `runner-scan` to Codex. That means scan behavior should normally be changed in the project memory rather than by editing a long embedded shell prompt.
 `runner-scan` is meant to execute the scan directly in the active Codex session. It must not call `run.sh` again or start a nested runner process.

@@ -143,6 +143,7 @@ The repo includes a `run.sh` runner for scans.
   Runs one scan immediately, publishes it, then keeps refreshing and publishing every hour.
 
 Internally, `run.sh` sends the short command `runner-scan` to Codex. That means scan behavior should normally be changed in the project memory rather than by editing a long embedded shell prompt.
+`runner-scan` is meant to execute the scan directly in the active Codex session. It must not call `run.sh` again or start a nested runner process.
 
 For the Pi runner, `run.sh` should use `codex exec --sandbox danger-full-access` rather than `--full-auto`. In practice, the narrower nested sandbox can block DNS or outbound HTTP for `tennis.egelberg.se` and Oddset even when plain shell networking works on the machine.
 

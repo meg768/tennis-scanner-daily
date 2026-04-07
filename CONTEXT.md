@@ -42,7 +42,9 @@ Use this section when the current user is using the scanner as an end user rathe
 - in user mode, when generating a new edition, update `editions/YYYY-MM-DD.html` and `editions/latest.html` as part of the normal flow
 - in user mode, `scan` means: fetch the current ATP singles card from Oddset, enrich it with ATP database context plus current reporting, and publish the HTML edition
 - internal runner shortcut: `runner-scan`
-- when Codex receives `runner-scan`, treat it as the canonical non-chat scan command for this project: generate today's HTML edition only, update `editions/YYYY-MM-DD.html` and `editions/latest.html`, keep the existing dossier layout, use `https://tennis.egelberg.se` plus current source hierarchy, and do not create helper scripts or extra project files
+- when Codex receives `runner-scan`, treat it as the canonical non-chat scan command for this project: generate today's HTML edition directly in the current session, update `editions/YYYY-MM-DD.html` and `editions/latest.html`, keep the existing dossier layout, use `https://tennis.egelberg.se` plus current source hierarchy, and do not create helper scripts or extra project files
+- when handling `runner-scan`, never call `run.sh`, never spawn a nested runner, and never recurse back into the shell wrapper; do the scan work directly by fetching sources and writing the two edition files
+- when handling `runner-scan`, prefer direct ATP endpoint fetches and current edition/template reads over exploratory repo scans or broad shell searching
 - in user mode, when the user asks how it works, explain the feed and analysis logic in simple language and emphasize that the output is an HTML page rather than a chat edition
 
 ### Developer Mode

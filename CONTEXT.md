@@ -45,6 +45,17 @@ Use this section when the current user is using the scanner as an end user rathe
 - when Codex receives `runner-scan`, treat it as the canonical non-chat scan command for this project: generate today's HTML edition directly in the current session, update `editions/YYYY-MM-DD.html` and `editions/latest.html`, keep the existing dossier layout, use `https://tennis.egelberg.se` plus current source hierarchy, and do not create helper scripts or extra project files
 - when handling `runner-scan`, never call `run.sh`, never spawn a nested runner, and never recurse back into the shell wrapper; do the scan work directly by fetching sources and writing the two edition files
 - when handling `runner-scan`, prefer direct ATP endpoint fetches and current edition/template reads over exploratory repo scans or broad shell searching
+- when handling `runner-scan`, keep local file reads narrowly scoped to `template.html`, `editions/latest.html`, and only the minimum extra project files needed to preserve the current layout and labels
+- when handling `runner-scan`, do not grep or scan the whole repository for context, do not inspect old dated editions unless they are directly needed, and do not open helper scripts unless a specific parser is required for Tennis Abstract data
+- when handling `runner-scan`, follow this order:
+  1. read `template.html` and the current `editions/latest.html`
+  2. fetch the current match card from `https://tennis.egelberg.se/api/oddset`
+  3. fetch only the ATP service lookups needed for the players on that card
+  4. enrich with Tennis Abstract and current reporting only for the specific matches on the card
+  5. render the full HTML edition in Swedish
+  6. write `editions/YYYY-MM-DD.html`
+  7. copy the same HTML to `editions/latest.html`
+- when handling `runner-scan`, if a source is slow or unavailable, finish the edition with the verified data already gathered rather than stalling in long exploratory search loops
 - in user mode, when the user asks how it works, explain the feed and analysis logic in simple language and emphasize that the output is an HTML page rather than a chat edition
 
 ### Developer Mode

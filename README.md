@@ -13,13 +13,20 @@ The goal is not to build a generic tennis news page or a pure odds screen. The w
 - use current web reporting for injury and availability context that the database does not contain
 - present the result in a readable newspaper-style layout
 
+## Runtime Backend
+
+In normal runtime, this project should talk to the hosted ATP HTTP service directly.
+
+- the ATP service is the real backend dependency
+- the intended runtime base URL is `https://tennis.egelberg.se`
+
 ## Core Workflow
 
 The edition should be built in this order:
 
 1. Fetch the current ATP singles card from the Oddset-backed ATP feed
 2. Resolve tournament and surface context
-3. Enrich each match with ATP rankings, head-to-head, form, and model context from the local ATP stack
+3. Enrich each match with ATP rankings, head-to-head, form, and model context from the hosted ATP service
 4. Check current web reporting for injuries, withdrawals, absences, or other material updates
 5. Write one HTML edition in Swedish
 6. Save it to both:
@@ -48,6 +55,7 @@ Typical prompts in this workspace:
 Expected behavior:
 
 - `scan` or `generate today's edition` should update the local HTML edition files
+- a normal scan should not create extra helper scripts or new project source files
 - `help` should explain how the match list is sourced and how the edition is assembled
 
 ## Sources
@@ -55,10 +63,68 @@ Expected behavior:
 Normal source mix:
 
 - Svenska Spel Oddset for the current ATP singles card and bookmaker odds
-- the sibling ATP stack and MCP bridge for rankings, head-to-head, schedule context, and historical data
+- `https://tennis.egelberg.se` for rankings, head-to-head, schedule context, model odds, and read-only SQL access
 - Tennis Abstract for side-by-side player stats, especially win splits and Match Charting comparisons
 - ATP Tour and tournament pages for official context
 - Reuters and other reliable reporting for current injury and availability news
+
+## ATP Service Endpoints
+
+The ATP service currently exposes these runtime endpoints under `https://tennis.egelberg.se`:
+
+- `GET /ok`
+  Returns a simple health payload (`I am OK`).
+
+- `GET /api/ping`
+  Returns a lightweight liveness payload with `message` and backend `version`. Good for deploy verification.
+
+- `GET /api/matches/live`
+  Returns normalized ATP live matches from ATP Tour live data.
+
+- `GET /api/player/rankings?top=N`
+  Returns current ATP rankings. `top` defaults to `100`.
+
+- `GET /api/player/search?term=...`
+  Runs the MariaDB `PLAYER_SEARCH(...)` procedure and returns ranked player candidates.
+
+- `GET /api/player/lookup?query=...`
+  Resolves a single best-match player id through the MariaDB `PLAYER_LOOKUP(...)` function.
+  Also accepts `term` or `searchTerm`.
+
+- `GET /api/oddset`
+  Returns the normalized Oddset ATP-family match feed used by this project.
+  This is the main endpoint for current live and upcoming bookmaker rows.
+
+- `GET /api/oddset?raw=1`
+  Returns the raw upstream payload bundle before normalization.
+
+- `GET /api/players/odds/:playerA/:playerB?surface=Clay`
+  Returns the hosted model odds for a specific ATP matchup.
+  `playerA` and `playerB` should be ATP ids present in the service database.
+
+- `GET /api/players/head-to-head/:playerA/:playerB?limit=10`
+  Returns resolved player metadata, overall H2H, surface splits, and recent meetings.
+  Supports ids or names in practice.
+
+- `GET /api/events/calendar`
+  Returns the ATP calendar feed normalized from ATP Tour tournament calendar data.
+
+- `POST /api/query`
+  Runs read-only SQL against the ATP database behind the hosted service.
+  Intended for trusted use only.
+
+## ATP Service Notes
+
+- canonical base URL: `https://tennis.egelberg.se`
+- scanner-relevant core endpoints:
+  `GET /api/oddset`
+  `GET /api/player/lookup`
+  `GET /api/players/odds/:playerA/:playerB`
+  `GET /api/players/head-to-head/:playerA/:playerB`
+  `GET /api/events/calendar`
+  `POST /api/query`
+- `/api/query` is read-only by design, but it still exposes broad database reads and should stay private
+- if we want the exact same config locally and on the Pi, the scanner should target these HTTP endpoints directly
 
 ## Automation
 

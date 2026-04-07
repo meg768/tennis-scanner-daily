@@ -65,7 +65,7 @@ Use this section when the current user is working on the project itself rather t
 - do not include doubles
 - do not include WTA
 - do not include Challenger matches
-- treat the ATP/Oddset feed from the sibling `atp-tennis` project or its MCP bridge as the canonical match list
+- treat `https://tennis.egelberg.se` as the canonical ATP backend at runtime
 - use current web reporting only as enrichment, not as the primary schedule source
 - when discussing injuries, withdrawals, or fitness concerns, use exact dates and source them
 - when a current claim cannot be verified, say so clearly and avoid presenting it as fact
@@ -97,6 +97,8 @@ Practical rule:
 - write the daily HTML edition to `editions/YYYY-MM-DD.html` using the scan date
 - write the same current edition to `editions/latest.html`
 - overwrite both files when regenerating the same day
+- when running a normal `scan`, do not create new helper scripts, generators, or scratch source files in the repository
+- for normal scan execution, limit file changes to the generated edition files unless the user explicitly asks for project or workflow edits
 - the edition should be directly readable from the local file system without Node, Python, or a preview server
 - the default timestamp for the edition should use Central European time unless the user later asks for another display convention
 - the current Pi deployment target should refresh every hour by default

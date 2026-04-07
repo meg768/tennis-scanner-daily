@@ -11,7 +11,7 @@ Current user intent:
 - publish a daily HTML page called `Tennis Scanner Daily`
 - cover all ATP singles matches currently listed on Svenska Spel Oddset
 - exclude doubles, WTA, and Challenger matches
-- use the ATP database and MCP bridge as the statistical backbone
+- use `https://tennis.egelberg.se` as the statistical backbone in normal runtime
 - enrich the card with current reporting from the web, especially for injuries, withdrawals, and other fresh context that is not stored in the database
 - present the result as a readable daily newspaper-style HTML page rather than a chat-first report
 - write the same edition to `editions/YYYY-MM-DD.html` and `editions/latest.html`
@@ -57,7 +57,7 @@ For each match, cover as much of the following as can be supported:
 Use sources in this order when possible:
 
 1. current Oddset ATP singles rows for the match list and bookmaker pricing
-2. ATP database / MCP tools for rankings, schedule context, head-to-head, and historical form
+2. `https://tennis.egelberg.se` for rankings, schedule context, head-to-head, historical form, and model odds
 3. Tennis Abstract for side-by-side player statistics, Elo context, and Match Charting data when available
 4. ATP Tour pages and tournament pages for official match, draw, and player context
 5. Reuters and other reliable current reporting for injuries, absences, withdrawals, and recent developments

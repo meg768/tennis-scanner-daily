@@ -56,6 +56,14 @@ Use this section when the current user is using the scanner as an end user rathe
   6. write `editions/YYYY-MM-DD.html`
   7. copy the same HTML to `editions/latest.html`
 - when handling `runner-scan`, if a source is slow or unavailable, finish the edition with the verified data already gathered rather than stalling in long exploratory search loops
+- when handling `runner-scan`, use the documented ATP service endpoints directly and do not try to discover APIs from `https://tennis.egelberg.se`, its frontend HTML, or its bundled JavaScript assets
+- when handling `runner-scan`, the preferred ATP endpoint set is:
+  - `GET /api/oddset` for the card and Oddset prices
+  - `GET /api/player/lookup?query=...` for player id resolution
+  - `GET /api/players/odds/:playerA/:playerB?surface=Clay` for Vitel odds
+  - `GET /api/players/head-to-head/:playerA/:playerB?limit=10` for meetings and player metadata
+  - `GET /api/events/calendar` for tournament context
+  - `POST /api/query` for read-only SQL only when the specific endpoint set above is not enough
 - in user mode, when the user asks how it works, explain the feed and analysis logic in simple language and emphasize that the output is an HTML page rather than a chat edition
 
 ### Developer Mode

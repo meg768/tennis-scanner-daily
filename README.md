@@ -94,9 +94,9 @@ For this project, treat those two metadata endpoints as the canonical documentat
 - scanner-relevant core endpoints:
   `GET /api/oddset`
   `GET /api/player/lookup`
-  `GET /api/players/odds/:playerA/:playerB`
+  `GET /api/players/odds?playerA=...&playerB=...`
   `GET /api/tennis-abstract/odds?playerA=...&playerB=...&surface=...`
-  `GET /api/players/head-to-head/:playerA/:playerB`
+  `GET /api/players/head-to-head?playerA=...&playerB=...`
   `GET /api/events/calendar`
   `POST /api/query`
 - canonical service docs:

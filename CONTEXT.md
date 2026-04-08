@@ -68,6 +68,7 @@ Read this file first at the start of every new thread or restart. Then read the 
 - prefer ATP SVG flags over emoji
 - render match-title flags as circular slots using `background-image:url(...)`
 - if a flag asset is missing, keep the same slot and rely on the backend fallback SVG
+- keep the odds logic internally consistent: if the table shows `Vitel`, then the comparison row and the `Spelidé` text must be based on `Vitel vs Oddset`, not on a different model line
 
 ## Scheduling And Run Script
 

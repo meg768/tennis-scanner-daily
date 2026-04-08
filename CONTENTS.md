@@ -79,11 +79,11 @@ Each match section should usually contain:
 - prefer ATP SVG flags over emoji
 - render those flags as circular `background-image` slots
 - keep mobile readability strong
-- in the `Odds` block, show `Oddset`, `TA`, and `Vitel`
-- use one consistent primary model reference for the edge row and `Spelidé`
-- if the rows shown are `Oddset`, `TA`, and `Vitel`, then the comparison row and `Spelidé` must explicitly follow the chosen primary line
-- if `Vitel` is the primary line, label the comparison row `Vitel vs Oddset` and base `Spelidé` on that row
-- do not let `Spelidé` follow `TA` or any other line while the visible edge row follows something else
+- in the `Odds` block, show `Oddset`, `TA`, `Vitel`, `TA vs Oddset`, and `Vitel vs Oddset` when the data supports it
+- use one consistent primary model reference for `Spelidé`
+- when both edge rows are shown, make `TA vs Oddset` the main public comparison line and let `Spelidé` follow it
+- keep `Vitel vs Oddset` as a secondary experimental comparison when useful
+- do not let `Spelidé` follow one comparison line while the visible main edge row follows another
 
 ## What To Avoid
 

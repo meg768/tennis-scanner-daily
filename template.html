@@ -434,6 +434,10 @@ a {
   gap: 0.85rem;
 }
 
+.match-block--primary {
+  margin-top: 1.5rem;
+}
+
 .match-block {
   padding: 0.9rem;
   background: var(--block-surface);
@@ -510,10 +514,16 @@ a {
 
 .odds-table th,
 .odds-table td {
-  padding: 0.45rem 0.35rem;
+  padding: 0.58rem 0.45rem;
   border-bottom: 1px solid var(--rule);
   text-align: left;
   vertical-align: top;
+}
+
+.odds-table th:first-child,
+.odds-table td:first-child {
+  width: 46%;
+  padding-right: 1.1rem;
 }
 
 .odds-table th {

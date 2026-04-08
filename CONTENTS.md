@@ -60,7 +60,7 @@ Each match section should usually contain:
 - `Spelbild`
 - `Form och historik`
 - `Head-to-head` when relevant
-- `Odds`
+- `Odds` as a full-width primary block rather than a cramped side-column block
 - `Skador och dagsläge` when relevant
 - `Marknad och modell` when relevant
 - one short closing line
@@ -79,13 +79,16 @@ Each match section should usually contain:
 - prefer ATP SVG flags over emoji
 - render those flags as circular `background-image` slots
 - keep mobile readability strong
-- in the `Odds` block, show `Svenska Spel`, `Tennis Abstract`, `Vitel`, `Tennis Abstract/Svenska Spel`, and `Vitel/Svenska Spel` when the data supports it
+- in the `Odds` block, show `Svenska Spel`, `Tennis Abstract`, and `Vitel` when the data supports it
+- if edge is shown, place it inline after the odds in the same cell, for example `1.43 (-2%)`
+- round displayed edge to whole percentages with no decimals
+- do not render separate edge rows
 - never abbreviate `Tennis Abstract` to `TA` in the rendered page
 - use one consistent primary model reference for `Spelidé`
-- when both edge rows are shown, make `Tennis Abstract/Svenska Spel` the main public comparison line and let `Spelidé` follow it
-- keep `Vitel/Svenska Spel` as a secondary experimental comparison when useful
-- do not let `Spelidé` follow one comparison line while the visible main edge row follows another
-- avoid unexplained shorthand like `pp` in rendered edge rows
+- let `Spelidé` follow the inline `Tennis Abstract` edge first when it is available
+- keep `Vitel` as a secondary experimental comparison when useful
+- do not let `Spelidé` follow one signal while the visible main odds line follows another
+- avoid unexplained shorthand like `pp` in rendered output
 - keep full player names in the main match title
 - use player surnames rather than first names in odds-table headers and in `Spelidé`
 

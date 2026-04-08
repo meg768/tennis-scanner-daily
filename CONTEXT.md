@@ -68,11 +68,15 @@ Read this file first at the start of every new thread or restart. Then read the 
 - prefer ATP SVG flags over emoji
 - render match-title flags as circular slots using `background-image:url(...)`
 - if a flag asset is missing, keep the same slot and rely on the backend fallback SVG
-- the `Odds` block may show `Svenska Spel`, `Tennis Abstract`, `Vitel`, `Tennis Abstract/Svenska Spel`, and `Vitel/Svenska Spel`
+- the `Odds` block may show `Svenska Spel`, `Tennis Abstract`, and `Vitel`
+- when edge is shown, append it inline after the odds in the same cell, for example `1.43 (-2%)`
+- round displayed edge to whole percentages with no decimals
+- do not render separate `Tennis Abstract edge` or `Vitel edge` rows
+- when present, the main price block should sit full-width in the match flow rather than being squeezed into the narrow side column
 - never abbreviate `Tennis Abstract` to `TA` in user-facing HTML
-- when both edge rows are shown, treat `Tennis Abstract/Svenska Spel` as the primary public reference line and let `Spelidé` follow that line first
-- `Vitel/Svenska Spel` may still be shown as a secondary experimental signal, but it must not control `Spelidé` when `Tennis Abstract/Svenska Spel` is also visible
-- do not use the bare suffix `pp` in user-facing output for edge rows
+- let `Spelidé` follow the inline `Tennis Abstract` edge first when that data is available
+- keep `Vitel` as a secondary experimental signal, but it must not control `Spelidé` when `Tennis Abstract` is also visible
+- do not use the bare suffix `pp` in user-facing output
 - do not show a `Codex` odds row in the edition
 - keep full player names in the main match title
 - use player surnames rather than first names in odds-table headers and in `Spelidé`

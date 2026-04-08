@@ -80,10 +80,12 @@ Each match section should usually contain:
 - render those flags as circular `background-image` slots
 - keep mobile readability strong
 - in the `Odds` block, show `Oddset`, `Tennis Abstract`, `Vitel`, `Tennis Abstract/Oddset`, and `Vitel/Oddset` when the data supports it
+- never abbreviate `Tennis Abstract` to `TA` in the rendered page
 - use one consistent primary model reference for `Spelidé`
 - when both edge rows are shown, make `Tennis Abstract/Oddset` the main public comparison line and let `Spelidé` follow it
 - keep `Vitel/Oddset` as a secondary experimental comparison when useful
 - do not let `Spelidé` follow one comparison line while the visible main edge row follows another
+- avoid unexplained shorthand like `pp` in rendered edge rows
 
 ## What To Avoid
 

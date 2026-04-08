@@ -69,8 +69,10 @@ Read this file first at the start of every new thread or restart. Then read the 
 - render match-title flags as circular slots using `background-image:url(...)`
 - if a flag asset is missing, keep the same slot and rely on the backend fallback SVG
 - the `Odds` block may show `Oddset`, `Tennis Abstract`, `Vitel`, `Tennis Abstract/Oddset`, and `Vitel/Oddset`
+- never abbreviate `Tennis Abstract` to `TA` in user-facing HTML
 - when both edge rows are shown, treat `Tennis Abstract/Oddset` as the primary public reference line and let `Spelidé` follow that line first
 - `Vitel/Oddset` may still be shown as a secondary experimental signal, but it must not control `Spelidé` when `Tennis Abstract/Oddset` is also visible
+- do not use the bare suffix `pp` in user-facing output for edge rows
 - do not show a `Codex` odds row in the edition
 
 ## Scheduling And Run Script

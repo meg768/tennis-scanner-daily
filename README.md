@@ -95,6 +95,7 @@ For this project, treat those two metadata endpoints as the canonical documentat
   `GET /api/oddset`
   `GET /api/player/lookup`
   `GET /api/players/odds/:playerA/:playerB`
+  `GET /api/tennis-abstract/odds?playerA=...&playerB=...&surface=...`
   `GET /api/players/head-to-head/:playerA/:playerB`
   `GET /api/events/calendar`
   `POST /api/query`
@@ -125,6 +126,7 @@ Internally, `run.sh` sends the short command `runner-scan` to Codex. That means 
 `runner-scan` should stay narrowly focused during a live scan: read `template.html` and `editions/latest.html`, fetch the current card and player context from `https://tennis.egelberg.se`, add current reporting for the specific matches on the card, then write the two edition files. It should avoid broad repo searching or wandering through unrelated historical files during a normal scan.
 `runner-scan` should also use the documented ATP service endpoints directly. It should not probe `https://tennis.egelberg.se/`, inspect the frontend app, or scrape bundled JavaScript assets just to rediscover endpoints that are already part of the project memory.
 To keep Pi scans stable, `runner-scan` should keep tool output compact. It should prefer filtered endpoint reads and small excerpts over dumping full HTML, full JSON payloads, or large schema responses into the session.
+In the `Odds` block, `runner-scan` should show `TA` rather than a generated `Codex` line. If `Vitel` remains the primary comparison line, then the edge row and `Spelidé` should still follow `Vitel vs Oddset`.
 
 For the Pi runner, `run.sh` should use `codex exec --sandbox danger-full-access` rather than `--full-auto`. In practice, the narrower nested sandbox can block DNS or outbound HTTP for `tennis.egelberg.se` and Oddset even when plain shell networking works on the machine.
 

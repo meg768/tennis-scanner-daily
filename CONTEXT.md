@@ -68,9 +68,9 @@ Read this file first at the start of every new thread or restart. Then read the 
 - prefer ATP SVG flags over emoji
 - render match-title flags as circular slots using `background-image:url(...)`
 - if a flag asset is missing, keep the same slot and rely on the backend fallback SVG
-- the `Odds` block may show `Oddset`, `TA`, `Vitel`, `TA vs Oddset`, and `Vitel vs Oddset`
-- when both edge rows are shown, treat `TA vs Oddset` as the primary public reference line and let `Spelidé` follow that line first
-- `Vitel vs Oddset` may still be shown as a secondary experimental signal, but it must not control `Spelidé` when `TA vs Oddset` is also visible
+- the `Odds` block may show `Oddset`, `Tennis Abstract`, `Vitel`, `Tennis Abstract/Oddset`, and `Vitel/Oddset`
+- when both edge rows are shown, treat `Tennis Abstract/Oddset` as the primary public reference line and let `Spelidé` follow that line first
+- `Vitel/Oddset` may still be shown as a secondary experimental signal, but it must not control `Spelidé` when `Tennis Abstract/Oddset` is also visible
 - do not show a `Codex` odds row in the edition
 
 ## Scheduling And Run Script

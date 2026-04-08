@@ -30,7 +30,7 @@ For each match, include as much of this as the sources support:
 - player strengths, tactical identity, and likely match pattern
 - recent form
 - head-to-head when relevant
-- odds context from Oddset, TA, and Vitel
+- odds context from Oddset, Tennis Abstract, and Vitel
 - injuries, withdrawals, or fitness questions when they are currently and credibly reported
 - a short closing judgement on what is most likely to decide the match
 
@@ -79,10 +79,10 @@ Each match section should usually contain:
 - prefer ATP SVG flags over emoji
 - render those flags as circular `background-image` slots
 - keep mobile readability strong
-- in the `Odds` block, show `Oddset`, `TA`, `Vitel`, `TA vs Oddset`, and `Vitel vs Oddset` when the data supports it
+- in the `Odds` block, show `Oddset`, `Tennis Abstract`, `Vitel`, `Tennis Abstract/Oddset`, and `Vitel/Oddset` when the data supports it
 - use one consistent primary model reference for `Spelidé`
-- when both edge rows are shown, make `TA vs Oddset` the main public comparison line and let `Spelidé` follow it
-- keep `Vitel vs Oddset` as a secondary experimental comparison when useful
+- when both edge rows are shown, make `Tennis Abstract/Oddset` the main public comparison line and let `Spelidé` follow it
+- keep `Vitel/Oddset` as a secondary experimental comparison when useful
 - do not let `Spelidé` follow one comparison line while the visible main edge row follows another
 
 ## What To Avoid

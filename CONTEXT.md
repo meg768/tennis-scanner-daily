@@ -39,7 +39,7 @@ Read this file first at the start of every new thread or restart. Then read the 
 ## Runtime Rules
 
 - use `https://tennis.egelberg.se` as the canonical runtime backend
-- fetch the current match card and bookmaker prices from `https://tennis.egelberg.se/api/oddset`
+- fetch the current match card and Svenska Spel prices from `https://tennis.egelberg.se/api/oddset`
 - use ATP and reliable current reporting only as enrichment
 - use bookmaker odds only for matches that have not started yet
 - `editions/latest.html` may be read to preserve layout, but it must never be used as a reason to skip regeneration
@@ -68,12 +68,14 @@ Read this file first at the start of every new thread or restart. Then read the 
 - prefer ATP SVG flags over emoji
 - render match-title flags as circular slots using `background-image:url(...)`
 - if a flag asset is missing, keep the same slot and rely on the backend fallback SVG
-- the `Odds` block may show `Oddset`, `Tennis Abstract`, `Vitel`, `Tennis Abstract/Oddset`, and `Vitel/Oddset`
+- the `Odds` block may show `Svenska Spel`, `Tennis Abstract`, `Vitel`, `Tennis Abstract/Svenska Spel`, and `Vitel/Svenska Spel`
 - never abbreviate `Tennis Abstract` to `TA` in user-facing HTML
-- when both edge rows are shown, treat `Tennis Abstract/Oddset` as the primary public reference line and let `Spelidé` follow that line first
-- `Vitel/Oddset` may still be shown as a secondary experimental signal, but it must not control `Spelidé` when `Tennis Abstract/Oddset` is also visible
+- when both edge rows are shown, treat `Tennis Abstract/Svenska Spel` as the primary public reference line and let `Spelidé` follow that line first
+- `Vitel/Svenska Spel` may still be shown as a secondary experimental signal, but it must not control `Spelidé` when `Tennis Abstract/Svenska Spel` is also visible
 - do not use the bare suffix `pp` in user-facing output for edge rows
 - do not show a `Codex` odds row in the edition
+- keep full player names in the main match title
+- use player surnames rather than first names in odds-table headers and in `Spelidé`
 
 ## Scheduling And Run Script
 

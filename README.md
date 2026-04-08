@@ -1,13 +1,13 @@
 # Tennis Scanner Daily
 
-Tennis Scanner Daily is a Codex-driven workspace for producing a daily HTML edition centered on the current ATP singles card from Svenska Spel Oddset.
+Tennis Scanner Daily is a Codex-driven workspace for producing a daily HTML edition centered on the current ATP singles card from Svenska Spel.
 
 The goal is not to build a generic tennis news page or a pure odds screen. The workflow starts from the live match card, then enriches each matchup with ATP database history, head-to-head context, form, overall level, event-surface context, and current reporting such as injuries or recent withdrawals.
 
 ## What This Project Is For
 
 - publish one daily HTML edition for the current ATP singles card
-- cover all ATP singles matches on Oddset
+- cover all ATP singles matches on the Svenska Spel card
 - exclude doubles, WTA, and Challenger matches
 - combine bookmaker pricing with ATP database context
 - use current web reporting for injury and availability context that the database does not contain
@@ -24,7 +24,7 @@ In normal runtime, this project should talk to the hosted ATP HTTP service direc
 
 The edition should be built in this order:
 
-1. Fetch the current ATP singles card from the Oddset-backed ATP feed
+1. Fetch the current ATP singles card from the Svenska Spel-backed ATP feed
 2. Resolve tournament and surface context
 3. Enrich each match with ATP rankings, head-to-head, form, and model context from the hosted ATP service
 4. Check current web reporting for injuries, withdrawals, absences, or other material updates
@@ -65,7 +65,7 @@ Expected behavior:
 
 Normal source mix:
 
-- Svenska Spel Oddset for the current ATP singles card and bookmaker odds
+- Svenska Spel for the current ATP singles card and bookmaker odds
 - `https://tennis.egelberg.se` for rankings, head-to-head, schedule context, model odds, and read-only SQL access
 - ATP Tour and tournament pages for official context
 - Reuters and other reliable reporting for current injury and availability news
@@ -126,9 +126,9 @@ Internally, `run.sh` sends the short command `runner-scan` to Codex. That means 
 `runner-scan` should stay narrowly focused during a live scan: read `template.html` and `editions/latest.html`, fetch the current card and player context from `https://tennis.egelberg.se`, add current reporting for the specific matches on the card, then write the two edition files. It should avoid broad repo searching or wandering through unrelated historical files during a normal scan.
 `runner-scan` should also use the documented ATP service endpoints directly. It should not probe `https://tennis.egelberg.se/`, inspect the frontend app, or scrape bundled JavaScript assets just to rediscover endpoints that are already part of the project memory.
 To keep Pi scans stable, `runner-scan` should keep tool output compact. It should prefer filtered endpoint reads and small excerpts over dumping full HTML, full JSON payloads, or large schema responses into the session.
-In the `Odds` block, `runner-scan` should show `Tennis Abstract` rather than a generated `Codex` line. Do not shorten that label to `TA` in the rendered page. When both `Tennis Abstract/Oddset` and `Vitel/Oddset` are present, `Tennis Abstract/Oddset` is the main public edge line and `Spelidé` should follow that line first, while `Vitel/Oddset` remains a secondary experimental comparison. Avoid unexplained shorthand like `pp` in user-facing edge rows.
+In the `Odds` block, `runner-scan` should show `Tennis Abstract` rather than a generated `Codex` line. Do not shorten that label to `TA` in the rendered page. When both `Tennis Abstract/Svenska Spel` and `Vitel/Svenska Spel` are present, `Tennis Abstract/Svenska Spel` is the main public edge line and `Spelidé` should follow that line first, while `Vitel/Svenska Spel` remains a secondary experimental comparison. Avoid unexplained shorthand like `pp` in user-facing edge rows. Keep full player names in the main match title, but use player surnames rather than first names in odds-table headers and in `Spelidé`.
 
-For the Pi runner, `run.sh` should use `codex exec --sandbox danger-full-access` rather than `--full-auto`. In practice, the narrower nested sandbox can block DNS or outbound HTTP for `tennis.egelberg.se` and Oddset even when plain shell networking works on the machine.
+For the Pi runner, `run.sh` should use `codex exec --sandbox danger-full-access` rather than `--full-auto`. In practice, the narrower nested sandbox can block DNS or outbound HTTP for `tennis.egelberg.se` and Svenska Spel-backed feeds even when plain shell networking works on the machine.
 
 ## Change Log
 

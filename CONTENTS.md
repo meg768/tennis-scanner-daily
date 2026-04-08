@@ -7,7 +7,7 @@ This file stores the editorial brief for what the edition should contain, how it
 ## Editorial Intent
 
 - publish a daily HTML page called `Tennis Scanner Daily`
-- cover all ATP singles matches currently listed on the Oddset card exposed by `https://tennis.egelberg.se/api/oddset`
+- cover all ATP singles matches currently listed on the Svenska Spel card exposed by `https://tennis.egelberg.se/api/oddset`
 - exclude doubles, WTA, and Challenger
 - use `https://tennis.egelberg.se` as the statistical backbone
 - enrich with current reporting when it adds real value, especially for injuries, withdrawals, and recent developments
@@ -30,7 +30,7 @@ For each match, include as much of this as the sources support:
 - player strengths, tactical identity, and likely match pattern
 - recent form
 - head-to-head when relevant
-- odds context from Oddset, Tennis Abstract, and Vitel
+- odds context from Svenska Spel, Tennis Abstract, and Vitel
 - injuries, withdrawals, or fitness questions when they are currently and credibly reported
 - a short closing judgement on what is most likely to decide the match
 
@@ -79,13 +79,15 @@ Each match section should usually contain:
 - prefer ATP SVG flags over emoji
 - render those flags as circular `background-image` slots
 - keep mobile readability strong
-- in the `Odds` block, show `Oddset`, `Tennis Abstract`, `Vitel`, `Tennis Abstract/Oddset`, and `Vitel/Oddset` when the data supports it
+- in the `Odds` block, show `Svenska Spel`, `Tennis Abstract`, `Vitel`, `Tennis Abstract/Svenska Spel`, and `Vitel/Svenska Spel` when the data supports it
 - never abbreviate `Tennis Abstract` to `TA` in the rendered page
 - use one consistent primary model reference for `Spelidé`
-- when both edge rows are shown, make `Tennis Abstract/Oddset` the main public comparison line and let `Spelidé` follow it
-- keep `Vitel/Oddset` as a secondary experimental comparison when useful
+- when both edge rows are shown, make `Tennis Abstract/Svenska Spel` the main public comparison line and let `Spelidé` follow it
+- keep `Vitel/Svenska Spel` as a secondary experimental comparison when useful
 - do not let `Spelidé` follow one comparison line while the visible main edge row follows another
 - avoid unexplained shorthand like `pp` in rendered edge rows
+- keep full player names in the main match title
+- use player surnames rather than first names in odds-table headers and in `Spelidé`
 
 ## What To Avoid
 
